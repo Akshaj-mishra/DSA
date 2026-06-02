@@ -279,4 +279,450 @@ Total unique elements: 5
 
 #### 4)  Unordered Set
 
+ What is an Unordered Set?
 
+- A container that stores **unique elements** (no duplicates allowed).
+- Elements are stored in **no particular order**.
+- Uses a **hash table** internally.
+- Time complexity: **O(1)** average case, **O(n)** worst case.
+
+ **Declaration**
+
+```cpp
+
+unordered_set<data_type> variable_name;
+// Example:
+unordered_set<int> s;
+unordered_set<string> names;
+
+```
+
+ Commonly Used Functions
+
+|Function|Description|Example|
+|---|---|---|
+|`insert(value)`|Inserts an element (ignores duplicates)|`s.insert(5);`|
+|`begin()`|Returns iterator to first element|`s.begin()`|
+|`end()`|Returns iterator after last element|`s.end()`|
+|`find(value)`|Searches for value, returns iterator if found, else `end()`|`s.find(3)`|
+|`count(value)`|Returns 1 if present, 0 otherwise|`s.count(7)`|
+|`erase(iterator)` or `erase(value)`|Deletes element(s)|`s.erase(s.begin())` or `s.erase(5)`|
+|`clear()`|Deletes all elements|`s.clear()`|
+|`size()`|Returns number of elements|`s.size()`|
+|`empty()`|Checks if set is empty|`s.empty()`|
+
+
+
+Code Example (from your content)
+
+```cpp
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+    // Declare an unordered_set of integers
+    unordered_set<int> s;
+    // Insert elements from 1 to 10
+    for (int i = 1; i <= 10; i++) {
+        s.insert(i);
+    }
+    // Display all elements
+    cout << "Elements present: ";
+    for (auto it = s.begin(); it != s.end(); it++) {
+        cout << *it << " ";
+    }
+    cout << endl;
+    // Check if element 2 exists using find()
+    int n = 2;
+    if (s.find(2) != s.end())
+        cout << n << " is present" << endl;
+    // Erase the first element
+    s.erase(s.begin());
+    // Display after deletion
+    cout << "After deleting first element: ";
+    for (auto it = s.begin(); it != s.end(); it++) {
+        cout << *it << " ";
+    }
+    cout << endl;
+    cout << "Size: " << s.size() << endl;
+    // Check if empty
+    if (s.empty() == false)
+        cout << "Set is not empty" << endl;
+    // Clear all elements
+    s.clear();
+    cout << "Size after clear: " << s.size() << endl;
+    return 0;
+}
+
+```
+
+#Extra_Example: Remove Duplicates from an Array/Vector
+
+One of the most practical uses of `unordered_set` is removing duplicates.
+
+```cpp
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+    // Original array with duplicates
+    vector<int> arr = {5, 2, 8, 2, 5, 1, 9, 8, 8, 3, 1, 4, 2, 5};
+    
+    cout << "Original array: ";
+    for (int x : arr) {
+        cout << x << " ";
+    }
+    cout << endl;
+    
+    // Step 1: Insert all elements into unordered_set (duplicates automatically removed)
+    unordered_set<int> uniqueSet;
+    for (int i = 0; i < arr.size(); i++) {
+        uniqueSet.insert(arr[i]);
+    }
+    
+    // Step 2: Display unique elements
+    cout << "Unique elements: ";
+    for (auto it = uniqueSet.begin(); it != uniqueSet.end(); it++) {
+        cout << *it << " ";
+    }
+    cout << endl;
+    
+    // Step 3: Get count of unique elements
+    cout << "Number of unique elements: " << uniqueSet.size() << endl;
+    
+    // Step 4: Convert back to vector (if needed)
+    vector<int> uniqueArr(uniqueSet.begin(), uniqueSet.end());
+    
+    cout << "Vector without duplicates: ";
+    for (int x : uniqueArr) {
+        cout << x << " ";
+    }
+    cout << endl;
+    
+    // Step 5: Check if a specific element exists
+    int searchValue = 8;
+    if (uniqueSet.count(searchValue)) {  // count() returns 1 if exists
+        cout << searchValue << " is present in the set" << endl;
+    }
+    
+    return 0;
+}
+```
+
+**Output:**
+```cpp
+
+text
+
+Original array: 5 2 8 2 5 1 9 8 8 3 1 4 2 5
+Unique elements: 4 1 2 3 8 5 9
+Number of unique elements: 7
+Vector without duplicates: 4 1 2 3 8 5 9
+8 is present in the set
+
+```
+
+Extra Example 2: Find Missing Elements
+
+```cpp
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+    // Expected numbers from 1 to 10
+    vector<int> actual = {1, 2, 4, 5, 7, 8, 10};  // Missing: 3, 6, 9
+    
+    // Insert actual numbers into set
+    unordered_set<int> present(actual.begin(), actual.end());
+    
+    // Find missing numbers
+    cout << "Missing numbers: ";
+    for (int i = 1; i <= 10; i++) {
+        if (present.find(i) == present.end()) {  // Not found
+            cout << i << " ";
+        }
+    }
+    cout << endl;
+    
+    return 0;
+}
+
+```
+**Output:**
+
+```cpp
+
+Missing numbers: 3 6 9
+
+```
+
+Quick Tips
+
+|Feature|unordered_set|set|
+|---|---|---|
+|Order|No specific order|Sorted order|
+|Internal|Hash table|Balanced BST|
+|Time (avg)|O(1)|O(log n)|
+|Use when|Order doesn't matter, need speed|Need sorted elements|
+
+- **Use `count()`** for simple existence check (returns 0 or 1).
+- **Use `find()`** when you need the iterator position.
+- Duplicate inserts are **silently ignored** (no error).
+- Perfect for **duplicate removal**, **membership testing**, and **set operations**.
+
+#### 5)  Set
+
+**What is a Set?**
+
+- A container that stores **unique elements** in a specific order.
+- Average case time complexity: **O(1)**
+- Worst case: **O(n)**
+
+**Common Functions**
+
+|Function|Description|
+|---|---|
+|`insert()`|Inserts an element into the set|
+|`begin()`|Iterator to first element|
+|`end()`|Iterator to position after last element|
+|`count()`|Returns `true` if element exists, else `false`|
+|`clear()`|Removes all elements|
+|`find()`|Searches for an element|
+|`erase()`|Deletes an element or range|
+|`size()`|Returns number of elements|
+|`empty()`|Checks if set is empty|
+
+**Example Code Summary**
+
+```cpp
+
+set<int> s;
+for(int i = 1; i <= 10; i++) s.insert(i);
+// Print set
+for(auto it = s.begin(); it != s.end(); it++)
+    cout << *it << " ";
+// Search
+if(s.find(2) != s.end())
+    cout << "2 is present";
+// Delete first element
+s.erase(s.begin());
+// Size & empty check
+cout << s.size();
+if(!s.empty()) cout << "Not empty";
+// Clear all
+s.clear();
+
+
+```
+
+Key Points to Remember
+
+-  All elements are **unique** (no duplicates)
+-  Elements are **automatically sorted** (ascending by default)
+-  Cannot modify elements directly (must erase & insert)
+- Useful for **set operations** like union, intersection, distinct elements
+
+---
+---
+
+Here are **very good notes on String Streaming in C++** (using `std::stringstream`), building on the STL set knowledge you just reviewed.
+
+---
+
+### String Streaming in C++ (`<sstream>`)
+
+### What is String Streaming?
+A **stringstream** treats a string like a stream (similar to `cin` / `cout`), allowing you to:
+- Extract data from a string (parsing)
+- Insert data into a string (formatting)
+- Convert between strings and other data types
+
+---
+
+### Required Header
+```cpp
+#include <sstream>
+```
+
+---
+
+### Creating a Stringstream
+
+```cpp
+stringstream ss;                    // Empty
+stringstream ss("Hello 123 3.14"); // With initial data
+```
+
+---
+
+### Inserting into Stringstream (`<<`)
+
+```cpp
+stringstream ss;
+ss << "Number: " << 42 << " " << 3.14;
+cout << ss.str();  // Output: Number: 42 3.14
+```
+
+---
+
+### Extracting from Stringstream (`>>`)
+
+```cpp
+stringstream ss("John 25 180.5");
+string name;
+int age;
+float height;
+
+ss >> name >> age >> height;
+// name = "John", age = 25, height = 180.5
+```
+
+---
+
+### Converting Between Types
+
+### String → Integer / Float
+```cpp
+stringstream ss("123");
+int num;
+ss >> num;  // num = 123
+```
+
+### Integer → String
+```cpp
+stringstream ss;
+ss << 456;
+string str = ss.str();  // str = "456"
+```
+
+---
+
+### Useful Methods
+
+| Method | Description |
+|--------|-------------|
+| `.str()` | Returns the underlying string |
+| `.str("new")` | Sets new string content |
+| `.clear()` | Clears error flags (not the content) |
+| `ss >> ws` | Skips whitespace |
+
+---
+
+### Parsing Example (Like `split()`)
+
+```cpp
+string data = "apple banana cherry grape";
+stringstream ss(data);
+string word;
+
+while (ss >> word) {
+    cout << word << endl;
+}
+// Output: apple banana cherry grape (each on new line)
+```
+
+---
+
+### Parsing CSV / Delimited Data
+
+```cpp
+string line = "101,Alice,85.5";
+stringstream ss(line);
+int id;
+string name;
+float score;
+char comma;
+
+ss >> id >> comma >> name >> comma >> score;
+// id=101, name="Alice", score=85.5
+```
+
+---
+
+### Practical Example: Summing Numbers from a String
+
+```cpp
+string numbers = "10 20 30 40 50";
+stringstream ss(numbers);
+int num, sum = 0;
+
+while (ss >> num) {
+    sum += num;
+}
+cout << "Sum: " << sum;  // Sum: 150
+```
+
+---
+
+### Common Pitfalls
+
+| Issue | Solution |
+|-------|----------|
+| `>>` stops at whitespace | Use `getline(ss, str, ',')` for custom delimiters |
+| Need to reuse same stringstream | Call `.clear()` AND `.str("")` |
+| Extracting fails with wrong type | Check `ss.fail()` or use `if(ss >> var)` |
+
+---
+
+### Resetting a Stringstream for Reuse
+
+```cpp
+stringstream ss;
+ss << "First";
+cout << ss.str();  // "First"
+
+// Reset properly
+ss.clear();        // Clear error flags
+ss.str("");        // Empty the content
+ss << "Second";
+cout << ss.str();  // "Second"
+```
+
+---
+
+### `stringstream` vs Other Methods
+
+| Feature | `stringstream` | `stoi()` / `to_string()` | `sscanf()` |
+|---------|---------------|--------------------------|------------|
+| Type safety | ✅ | ✅ | ❌ (C-style) |
+| Multiple values | ✅ | ❌ (one at a time) | ✅ |
+| C++ idiomatic | ✅ | ✅ | ❌ |
+| Performance | Moderate | Fast | Fast |
+
+---
+
+### Quick Reference Card
+
+```cpp
+#include <sstream>
+
+// Creation
+stringstream ss;
+stringstream ss("text");
+
+// Output to string
+ss << data;
+string result = ss.str();
+
+// Input from string
+ss >> variable;
+
+// Clear & reuse
+ss.clear();
+ss.str("");
+
+// Parsing loop
+while (ss >> word) { /* use word */ }
+```
+
+---
+
+### When to Use Stringstream
+- Parsing space-separated data
+- Converting between strings and numbers
+- Building complex strings with mixed types
+- Implementing a `split()`-like functionality
+- Reading formatted data from a string
+
+---
+---
