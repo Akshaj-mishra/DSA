@@ -8,7 +8,7 @@ public:
             n /= 2;
         }
 
-        uint32_t ans = 0;
+        int ans = 0;
         for (char c : s) {
             ans = ans * 2 + (c - '0');
         }
