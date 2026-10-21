@@ -10,7 +10,7 @@ class Solution:
                 for i in range(idx , len(nums)):
                     nums[idx] , nums[i] = nums[i] , nums[idx]
                     recurr(idx + 1)
-                    nums[i] , nums[idx] = nums[idx] , nums[i]
+                    nums[idx] , nums[i] = nums[i] , nums[idx]
             
             recurr(0)
 
