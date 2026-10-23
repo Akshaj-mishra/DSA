@@ -3,8 +3,6 @@ class Solution:
         if n == 0:
             return 1
 
-        n = min(n, 10)
-
         total = 10
         current = 9
         available = 9
