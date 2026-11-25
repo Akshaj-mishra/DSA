@@ -4,7 +4,7 @@ class Solution:
         sets = {}
 
         for i in strs:
-            a = tuple(sorted(i))
+            a = str(sorted(i))
 
             if a in sets:
                 sets[a].append(i)
